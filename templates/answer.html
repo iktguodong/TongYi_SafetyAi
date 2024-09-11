@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>问答结果</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <h1 class="text-center">问答结果</h1>
+            {% if result.get('error') %}
+                <div class="alert alert-danger">错误: {{ result.error }}</div>
+            {% else %}
+                <p><strong>问题：</strong>{{ result.question }}</p>
+                <p><strong>回答：</strong><br>{{ result.answer | safe }}</p>
+            {% endif %}
+            <h2>历史记录</h2>
+            <ul class="list-group">
+                {% for entry in history %}
+                    <li class="list-group-item">
+                        <p><strong>问题：</strong>{{ entry.question }}</p>
+                        <p><strong>回答：</strong><br>{{ entry.answer | safe }}</p>
+                    </li>
+                {% endfor %}
+            </ul>
+            <div class="text-center mt-3">
+                <a href="/new_session" class="btn btn-secondary">开始新会话</a>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

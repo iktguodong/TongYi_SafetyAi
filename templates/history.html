@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat History</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <div class="chat-container">
+            <h1>Chat History</h1>
+            <div id="history" class="history-box">
+                {% for user_id, session in history.items() %}
+                    <div class="history-session">
+                        <h3>Session ID: {{ user_id }}</h3>
+                        <ul>
+                            {% for entry in session.conversation %}
+                                <li><strong>Q:</strong> {{ entry.question }}<br><strong>A:</strong> {{ entry.answer }}</li>
+                            {% endfor %}
+                        </ul>
+                        <form action="{{ url_for('delete_history', user_id=user_id) }}" method="post">
+                            <button type="submit" class="delete-btn">删除此对话</button>
+                        </form>
+                    </div>
+                {% endfor %}
+            </div>
+
+            <a href="{{ url_for('index') }}" class="back-btn">继续问问题</a>
+        </div>
+    </div>
+</body>
+</html>
