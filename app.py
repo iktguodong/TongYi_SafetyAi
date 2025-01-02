@@ -55,7 +55,7 @@ def index():
     session['user_id'] = user_id
     intro_message = {
         'question': '',
-        'answer': '你好，我是你的健康专家~~'
+        'answer': '我是小安，您的安全生产助手~~'
     }
     sessions_history[user_id] = {'conversation': [intro_message], 'is_active': True}
     save_history(sessions_history)
